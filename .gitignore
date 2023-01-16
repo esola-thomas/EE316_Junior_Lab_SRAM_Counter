@@ -1,0 +1,27 @@
+# git config --global core.excludesFile .\.gitignore
+
+# Ignore Quartus db file
+db
+incremental_db
+output_files
+rtl_work
+*.sft
+*.vho
+*.bsf
+*.ini
+_*
+@_*
+
+# Ignore multiple files
+*_ignore
+*.pdf
+*.docx
+*.zip
+*.xlsx
+*.mp4
+*.mov 
+*.vsdx
+*.bak
+*.jar
+
+

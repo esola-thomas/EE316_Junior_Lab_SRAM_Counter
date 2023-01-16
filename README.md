@@ -5,6 +5,8 @@
     - Keith Tschang tschankl@clarkson.edu
     - Ernesto Sola-Thomas schumae@clarkson.edu
 
+# Cyclone IV EP4CE115F29 device
+
 Design a SRAM based "programmable 8-bit counter of arbitrary sequence" that runs on a one Hz clock. Note that the DE2-115 board has a 2 Mbyte (1M x 16) of fast asynchronous SRAM. 
 
 Specification:  SRAM based Programmable Counter
