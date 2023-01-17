@@ -5,6 +5,14 @@
     - Keith Tschang tschankl@clarkson.edu
     - Ernesto Sola-Thomas schumae@clarkson.edu
 
+# File tree
+    |-- SRAM_Counter.qpf
+    |-- |-- driver_7_degemnt.vhd
+    |-- |-- | -- controller_7_segment.vhd
+    |-- |-- sram_ctrl.vhd
+    |-- |-- sine.mif
+    |-- DE2_115_pin_assignments.csv
+
 # Cyclone IV EP4CE115F29 device
 
 Design a SRAM based "programmable 8-bit counter of arbitrary sequence" that runs on a one Hz clock. Note that the DE2-115 board has a 2 Mbyte (1M x 16) of fast asynchronous SRAM. 
