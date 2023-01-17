@@ -27,6 +27,5 @@ architecture arch of controller_7_segment is
             "0110001" when iData = "1100" else -- C
             "1000010" when iData = "1101" else -- D
             "0110000" when iData = "1110" else -- E
-            "0111000" when iData = "1111" else -- F
-            (others => "0000000");
+            "0111000" when iData = "1111"; -- F
 end arch;
