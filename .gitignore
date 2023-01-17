@@ -7,7 +7,6 @@ output_files
 rtl_work
 *.sft
 *.vho
-*.bsf
 *.ini
 _*
 @_*
