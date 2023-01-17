@@ -34,11 +34,11 @@ SRAM_Add_d2 <= SRAM_Add (7 downto 4);
 SRAM_oData_d1 <= SRAM_oData (3 downto 0);
 SRAM_oData_d2 <= SRAM_oData (7 downto 4);
 SRAM_oData_d3 <= SRAM_oData (11 downto 8);
-SRAM_oData_d4 <= SRAM_oData (15 downto 11);
+SRAM_oData_d4 <= SRAM_oData (15 downto 12);
 
     oData_d1 : controller_7_segment port map (
         iData   => SRAM_oData_d1,
-        HEX     => HEX1
+        HEX     => HEX0
     );
 
     oData_d2 : controller_7_segment port map (
@@ -48,12 +48,12 @@ SRAM_oData_d4 <= SRAM_oData (15 downto 11);
 
     oData_d3 : controller_7_segment port map (
         iData   => SRAM_oData_d3,
-        HEX     => HEX1
+        HEX     => HEX2
     );
 
     oData_d4 : controller_7_segment port map (
         iData   => SRAM_oData_d4,
-        HEX     => HEX1
+        HEX     => HEX3
     );
 
     Add_d1 : controller_7_segment port map (
