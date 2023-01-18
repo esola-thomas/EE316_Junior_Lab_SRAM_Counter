@@ -38,6 +38,10 @@ begin
 	process
 	begin
 		row <= "10111";
+		wait for 300 ns;
+		row <= "11111";
+		wait for 300 ns;
+		row <= "01111";
 		wait;
 	end process;
 	
