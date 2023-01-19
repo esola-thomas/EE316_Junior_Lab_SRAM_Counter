@@ -10,199 +10,101 @@
 # ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/concat_zero_to_input.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity shift_regs
-# -- Compiling architecture arch of shift_regs
+# -- Loading package NUMERIC_STD
+# -- Compiling entity concat_zero_to_input
+# -- Compiling architecture arch of concat_zero_to_input
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/counter.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity counter
+# -- Compiling architecture behavioral of counter
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/keypad_int.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity keypad_int
+# -- Compiling architecture arch of keypad_int
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/sram_ctrl.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity sram_ctrl
+# -- Compiling architecture arch of sram_ctrl
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/driver_7_degemnt.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity driver_7_degemnt
+# -- Compiling architecture arch of driver_7_degemnt
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/controller_7_segment.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity controller_7_segment
+# -- Compiling architecture arch of controller_7_segment
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/ROM.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity ROM
+# -- Compiling architecture SYN of rom
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/test_display.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity test_display
+# -- Compiling architecture arch of test_display
 # 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs_tb
-# -- Compiling architecture arch of shift_regs_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
+vsim work.keypad_int
+# vsim work.keypad_int 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.shift_regs_tb(arch)
-# Loading work.shift_regs(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs
-# -- Compiling architecture arch of shift_regs
-# 
-add wave -position end  sim:/shift_regs_tb/iData
-add wave -position end  sim:/shift_regs_tb/DV
-add wave -position end  sim:/shift_regs_tb/AddOrData
-add wave -position end  sim:/shift_regs_tb/clk
-add wave -position end  sim:/shift_regs_tb/oAdd
-add wave -position end  sim:/shift_regs_tb/oData
-run
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs_tb
-# -- Compiling architecture arch of shift_regs_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
+# Loading work.keypad_int(arch)
+vsim -voptargs=+acc work.keypad_int
+# vsim -voptargs=+acc work.keypad_int 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.shift_regs_tb(arch)
-# Loading work.shift_regs(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
+# Loading work.keypad_int(arch)
+add wave -position insertpoint  \
+sim:/keypad_int/MAX_COUNT
+vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/keypad_int_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity shift_regs
-# -- Compiling architecture arch of shift_regs
-# 
-add wave -position end  sim:/shift_regs_tb/iData
-add wave -position end  sim:/shift_regs_tb/clk
-add wave -position end  sim:/shift_regs_tb/DV
-add wave -position end  sim:/shift_regs_tb/AddOrData
-add wave -position end  sim:/shift_regs_tb/oAdd
-add wave -position end  sim:/shift_regs_tb/oData
-run
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs_tb
-# -- Compiling architecture arch of shift_regs_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
+# -- Compiling entity keypad_int_tb
+# -- Compiling architecture arch of keypad_int_tb
+vsim -voptargs=+acc work.keypad_int_tb
+# vsim -voptargs=+acc work.keypad_int_tb 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.shift_regs_tb(arch)
-# Loading work.shift_regs(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs
-# -- Compiling architecture arch of shift_regs
-# 
-run
-add wave -position end  sim:/shift_regs_tb/iData
-add wave -position end  sim:/shift_regs_tb/clk
-add wave -position end  sim:/shift_regs_tb/DV
-add wave -position end  sim:/shift_regs_tb/AddOrData
-add wave -position end  sim:/shift_regs_tb/oAdd
-add wave -position end  sim:/shift_regs_tb/oData
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.shift_regs_tb'.
-# 
-# Load canceled
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs_tb
-# -- Compiling architecture arch of shift_regs_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
-# Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.shift_regs_tb(arch)
-# Loading work.shift_regs(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs
-# -- Compiling architecture arch of shift_regs
-# 
+# Loading work.keypad_int_tb(arch)
+# Loading work.keypad_int(arch)
+add wave -position insertpoint  \
+sim:/keypad_int_tb/clk \
+sim:/keypad_int_tb/row \
+sim:/keypad_int_tb/column \
+sim:/keypad_int_tb/data \
+sim:/keypad_int_tb/DV
 run
 run
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.shift_regs_tb'.
-# 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs_tb
-# -- Compiling architecture arch of shift_regs_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
-# Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.shift_regs_tb(arch)
-# Loading work.shift_regs(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity shift_regs
-# -- Compiling architecture arch of shift_regs
-# 
 run
 run
