@@ -10,28 +10,28 @@
 # ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
+# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
+# -- Compiling entity shift_regs
+# -- Compiling architecture arch of shift_regs
 # 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
+vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
+# -- Compiling entity shift_regs_tb
+# -- Compiling architecture arch of shift_regs_tb
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
+# Loading work.shift_regs_tb(arch)
+# Loading work.shift_regs(arch)
 # do SRAM_Counter_run_msim_rtl_vhdl.do 
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
@@ -40,48 +40,35 @@ vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.
 # vmap work rtl_work
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
+# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
+# -- Compiling entity shift_regs
+# -- Compiling architecture arch of shift_regs
 # 
-add wave -position end  sim:/keypad_int_tb/clk
-add wave -position end  sim:/keypad_int_tb/row
-add wave -position end  sim:/keypad_int_tb/column
-add wave -position end  sim:/keypad_int_tb/data
-add wave -position end  sim:/keypad_int_tb/DV
+add wave -position end  sim:/shift_regs_tb/iData
+add wave -position end  sim:/shift_regs_tb/DV
+add wave -position end  sim:/shift_regs_tb/AddOrData
+add wave -position end  sim:/shift_regs_tb/clk
+add wave -position end  sim:/shift_regs_tb/oAdd
+add wave -position end  sim:/shift_regs_tb/oData
 run
-run
-run
-run
-run
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
+vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-restart
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
+# -- Compiling entity shift_regs_tb
+# -- Compiling architecture arch of shift_regs_tb
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
+# Loading work.shift_regs_tb(arch)
+# Loading work.shift_regs(arch)
 # do SRAM_Counter_run_msim_rtl_vhdl.do 
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
@@ -90,49 +77,35 @@ vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.
 # vmap work rtl_work
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
+# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
+# -- Compiling entity shift_regs
+# -- Compiling architecture arch of shift_regs
 # 
-add wave -position end  sim:/keypad_int_tb/clk
-add wave -position end  sim:/keypad_int_tb/row
-add wave -position end  sim:/keypad_int_tb/column
-add wave -position end  sim:/keypad_int_tb/data
-add wave -position end  sim:/keypad_int_tb/DV
+add wave -position end  sim:/shift_regs_tb/iData
+add wave -position end  sim:/shift_regs_tb/clk
+add wave -position end  sim:/shift_regs_tb/DV
+add wave -position end  sim:/shift_regs_tb/AddOrData
+add wave -position end  sim:/shift_regs_tb/oAdd
+add wave -position end  sim:/shift_regs_tb/oData
 run
-run
-run
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
+vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Error loading design
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
+# -- Compiling entity shift_regs_tb
+# -- Compiling architecture arch of shift_regs_tb
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
+# Loading work.shift_regs_tb(arch)
+# Loading work.shift_regs(arch)
 # do SRAM_Counter_run_msim_rtl_vhdl.do 
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
@@ -141,342 +114,42 @@ vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.
 # vmap work rtl_work
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
+# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
+# -- Compiling entity shift_regs
+# -- Compiling architecture arch of shift_regs
 # 
 run
-run
-run
-run
-run
+add wave -position end  sim:/shift_regs_tb/iData
+add wave -position end  sim:/shift_regs_tb/clk
+add wave -position end  sim:/shift_regs_tb/DV
+add wave -position end  sim:/shift_regs_tb/AddOrData
+add wave -position end  sim:/shift_regs_tb/oAdd
+add wave -position end  sim:/shift_regs_tb/oData
 restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Error loading design
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# 
-run
-run
-run
-run
-run
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-restart -f
-# No Design Loaded!
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# 
-run
-run
-run
-run
-run
-run
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-# Break key hit 
-# Break key hit 
-# Break key hit 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Error loading design
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# 
-run
-run
-run
-run
-# Load canceled
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# 
-run
-run
-run
-run
-run
-run
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
-# Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui rtl_work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui rtl_work.keypad_int_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading rtl_work.keypad_int_tb(arch)
-# Loading rtl_work.keypad_int(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# 
-run
-run
-run
-run
-run
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
-# 
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui rtl_work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui rtl_work.keypad_int_tb 
-# Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui rtl_work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui rtl_work.keypad_int_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading rtl_work.keypad_int_tb(arch)
-# Loading rtl_work.keypad_int(arch)
-# do SRAM_Counter_run_msim_rtl_vhdl.do 
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
-# }
-# vlib rtl_work
-# vmap work rtl_work
-# Modifying modelsim.ini
-# 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# 
-run
-run
-run
-run
-add wave -position insertpoint sim:/keypad_int_tb/*
-restart
-# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.keypad_int_tb'.
+# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.shift_regs_tb'.
 # 
 # Load canceled
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
+vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
+# -- Compiling entity shift_regs_tb
+# -- Compiling architecture arch of shift_regs_tb
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
 # Error loading design
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
+# Loading work.shift_regs_tb(arch)
+# Loading work.shift_regs(arch)
 # do SRAM_Counter_run_msim_rtl_vhdl.do 
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
@@ -485,39 +158,36 @@ vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.
 # vmap work rtl_work
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
+# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
+# -- Compiling entity shift_regs
+# -- Compiling architecture arch of shift_regs
 # 
 run
 run
-run
-run
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
+restart
+# ** Error: (vsim-3170) Could not find 'C:/Quartus_II_Projects/EE316/Project1/simulation/modelsim/rtl_work.shift_regs_tb'.
+# 
+vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/shift_regs_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vcom -reportprogress 300 -work work C:/Quartus_II_Projects/EE316/Project1/keypad_int_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb
-# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.keypad_int_tb 
+# -- Compiling entity shift_regs_tb
+# -- Compiling architecture arch of shift_regs_tb
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
+# Error loading design
+vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb
+# vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.shift_regs_tb 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
+# Loading work.shift_regs_tb(arch)
+# Loading work.shift_regs(arch)
 # do SRAM_Counter_run_msim_rtl_vhdl.do 
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
@@ -526,23 +196,13 @@ vsim +altera -do SRAM_Counter_run_msim_rtl_vhdl.do -l msim_transcript -gui work.
 # vmap work rtl_work
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/keypad_int.vhd}
+# vcom -93 -work work {C:/Quartus_II_Projects/EE316/Project1/shift_regs.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
+# -- Compiling entity shift_regs
+# -- Compiling architecture arch of shift_regs
 # 
-add wave -position end  sim:/keypad_int_tb/clk
-add wave -position end  sim:/keypad_int_tb/row
-add wave -position end  sim:/keypad_int_tb/column
-add wave -position end  sim:/keypad_int_tb/data
-add wave -position end  sim:/keypad_int_tb/DV
-run
-run
-run
-run
-run
 run
 run

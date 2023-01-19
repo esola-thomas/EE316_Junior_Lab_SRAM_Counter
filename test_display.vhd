@@ -13,7 +13,7 @@ end test_display;
 architecture arch of test_display is
 begin
 	SRAM_Add (3 downto 0) <= "1111"; -- 1
-	SRAM_Add (7 downto 4) <= iData(3 downto 0); -- 0
+	SRAM_Add (7 downto 4) <= iData(3 downto 0); -- Keypad value
 
 	SRAM_oData (3 downto 0) <= SRAM_iData(3 downto 0); -- 5
 	SRAM_oData (7 downto 4) <= SRAM_iData(7 downto 4); -- 4
