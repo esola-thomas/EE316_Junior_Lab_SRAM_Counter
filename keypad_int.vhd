@@ -71,6 +71,8 @@ architecture arch of keypad_int is
 						"1110" when 3,
 						"0000" when others;
 						
+	-- keypad data is 5 bit long because of the extra keys "L" , "H", "Shift"
+	-- The first 4 bits shoould be all the hex values 0-F
 	with rowcolumn select
 		data <=	"00000" when "111101011",
 					"00001" when "101110111",
