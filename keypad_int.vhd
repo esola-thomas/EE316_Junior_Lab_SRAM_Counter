@@ -51,18 +51,19 @@ architecture arch of keypad_int is
 				end if;
 				
 				if(row /= "11111") then
-					column_en <= '0';
 					if(row /= row_reg) then
 						dv_reg <= '1';
 					end if;
-				else
-					column_en <= '1';
 				end if;
 				
 				row_reg <= row;
 			end if;
 		end if;
 	end process;
+	
+	with row select
+		column_en <= 	'1' when "11111",
+							'0' when others;
 	
 	with sel_column select
 		cbuff <= 	"0111" when 0,
