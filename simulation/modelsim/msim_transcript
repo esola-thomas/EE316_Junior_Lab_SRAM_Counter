@@ -10,101 +10,76 @@
 # ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/concat_zero_to_input.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity concat_zero_to_input
-# -- Compiling architecture arch of concat_zero_to_input
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/counter.vhd}
+# vcom -93 -work work {C:/Users/tschankl/Documents/EE316/Project1/system_state.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package std_logic_arith
 # -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter
-# -- Compiling architecture behavioral of counter
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/keypad_int.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity keypad_int
-# -- Compiling architecture arch of keypad_int
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/sram_ctrl.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity sram_ctrl
-# -- Compiling architecture arch of sram_ctrl
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/driver_7_degemnt.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity driver_7_degemnt
-# -- Compiling architecture arch of driver_7_degemnt
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/controller_7_segment.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity controller_7_segment
-# -- Compiling architecture arch of controller_7_segment
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/ROM.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity ROM
-# -- Compiling architecture SYN of rom
-# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/test_display.vhd}
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity test_display
-# -- Compiling architecture arch of test_display
+# -- Compiling entity system_state
+# -- Compiling architecture behavioral of system_state
 # 
-vsim work.keypad_int
-# vsim work.keypad_int 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int(arch)
-vsim -voptargs=+acc work.keypad_int
-# vsim -voptargs=+acc work.keypad_int 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int(arch)
-add wave -position insertpoint  \
-sim:/keypad_int/MAX_COUNT
-vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Junior_Lab_SRAM_Counter/keypad_int_tb.vhd
+vcom -reportprogress 300 -work work C:/Users/tschankl/Documents/EE316/Project1/state_system_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity keypad_int_tb
-# -- Compiling architecture arch of keypad_int_tb
-vsim -voptargs=+acc work.keypad_int_tb
-# vsim -voptargs=+acc work.keypad_int_tb 
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity state_system_tb
+# -- Compiling architecture testbench of state_system_tb
+vsim -voptargs=+acc work.system_state
+# vsim -voptargs=+acc work.system_state 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.keypad_int_tb(arch)
-# Loading work.keypad_int(arch)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.system_state(behavioral)
 add wave -position insertpoint  \
-sim:/keypad_int_tb/clk \
-sim:/keypad_int_tb/row \
-sim:/keypad_int_tb/column \
-sim:/keypad_int_tb/data \
-sim:/keypad_int_tb/DV
-run
-run
-run
+sim:/system_state/ireset
+add wave -position insertpoint  \
+sim:/system_state/clk \
+sim:/system_state/ireset \
+sim:/system_state/data_valid \
+sim:/system_state/key_press \
+sim:/system_state/direction \
+sim:/system_state/halt \
+sim:/system_state/PR_pulse \
+sim:/system_state/OP_mode \
+sim:/system_state/init \
+sim:/system_state/Add_Data \
+sim:/system_state/state \
+sim:/system_state/clk_en \
+sim:/system_state/direction_s \
+sim:/system_state/halt_s \
+sim:/system_state/PR_pulse_s \
+sim:/system_state/OP_mode_s \
+sim:/system_state/init_s \
+sim:/system_state/Add_Data_s \
+sim:/system_state/data_valid_reg \
+sim:/system_state/count
+vsim -voptargs=+acc work.state_system_tb
+# vsim -voptargs=+acc work.state_system_tb 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.state_system_tb(testbench)
+# Loading work.system_state(behavioral)
+add wave -position end  sim:/state_system_tb/CLK
+add wave -position end  sim:/state_system_tb/RESET
+add wave -position end  sim:/state_system_tb/DATA_VALID
+add wave -position end  sim:/state_system_tb/KEY_PRESS
+add wave -position end  sim:/state_system_tb/DIRECTION
+add wave -position end  sim:/state_system_tb/HALT
+add wave -position end  sim:/state_system_tb/PR_PULSE
+add wave -position end  sim:/state_system_tb/OP_MODE
+add wave -position end  sim:/state_system_tb/INIT
+add wave -position end  sim:/state_system_tb/ADD_DATA
+add wave -position end  sim:/state_system_tb/PER
+add wave -position end  sim:/state_system_tb/DUT/state
+add wave -position end  sim:/state_system_tb/DUT/data_valid_reg
 run

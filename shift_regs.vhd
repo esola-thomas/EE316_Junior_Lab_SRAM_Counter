@@ -21,20 +21,21 @@ begin
 	
 	process(clk)
 	begin
-		if((DV_reg = '0') and (DV = '1') and (iData(4) = '0')) then
-			if(AddOrData = '0') then
-				--Set to Address register
-				oAdd_reg(7 downto 4) <= oAdd_reg(3 downto 0);
-				oAdd_reg(3 downto 0) <= iData(3 downto 0);
-			else
-				--Set to Data register
-				oData_reg(15 downto 12) <= oData_reg(11 downto 8);
-				oData_reg(11 downto 8) <= oData_reg(7 downto 4);
-				oData_reg(7 downto 4) <= oData_reg(3 downto 0);
-				oData_reg(3 downto 0) <= iData(3 downto 0);
+		if(rising_edge(clk)) then
+			if((DV_reg = '0') and (DV = '1') and (iData(4) = '0')) then
+				if(AddOrData = '0') then
+					--Set to Address register
+					oAdd_reg(7 downto 4) <= oAdd_reg(3 downto 0);
+					oAdd_reg(3 downto 0) <= iData(3 downto 0);
+				else
+					--Set to Data register
+					oData_reg(15 downto 12) <= oData_reg(11 downto 8);
+					oData_reg(11 downto 8) <= oData_reg(7 downto 4);
+					oData_reg(7 downto 4) <= oData_reg(3 downto 0);
+					oData_reg(3 downto 0) <= iData(3 downto 0);
+				end if;
 			end if;
+			DV_reg <= DV;
 		end if;
-		
-		DV_reg <= DV;
 	end process;
 end arch;

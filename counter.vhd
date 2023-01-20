@@ -8,8 +8,8 @@ entity counter is
 		clk_delay : std_logic_vector(27 downto 0) := X"2FAF080"); -- Default 50,000,000 clk cycles (1 sec)
 	port (  
 		clk			: in std_logic;
-		--direction	: in std_logic; -- Interchangable with last signal before begin (just uncoment one)
-		--halt		: in std_logic;
+		direction	: in std_logic; -- Interchangable with last signal before begin (just uncoment one)
+		halt			: in std_logic; -- 0 continue counting, 1 stop counting
 		ireset		: in std_logic;
 		count		: out std_logic_vector(7 downto 0);
 		clk_en		: out std_logic); 
@@ -23,12 +23,12 @@ architecture behavioral of counter is
 	signal oClk_en 		: std_logic := '0'; 
 	
 	-- Interchangable with port direction input (just one can be uncomented)
-	signal direction : std_logic := '0'; -- Fixed value 0, count up
+	-- signal direction : std_logic := '0'; -- Fixed value 0, count up
 	begin
 
 	-- clk en process
 	process (clk, ireset) begin
-		if (rising_edge(clk)) then 
+		if (rising_edge(clk) and halt = '0') then 
 			if (ireset = '1') then
 				delay_count <= (others => '0');
 				oClk_en <= '0'; 
