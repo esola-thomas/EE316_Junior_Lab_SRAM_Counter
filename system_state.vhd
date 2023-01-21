@@ -3,7 +3,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity system_state is
-
 port ( clk : in std_logic;
 ireset : in std_logic;
 data_valid : in std_logic;
@@ -11,7 +10,8 @@ key_press : in std_logic_vector(4 downto 0);
 
 direction : out std_logic;  -- to counter
 halt : out std_logic;  -- to counter
-PR_pulse : out std_logic; -- to SRAM Controller
+PR_mode : out std_logic; -- to SRAM Controller
+RW_pulse : out std_logic;
 OP_mode : out std_logic; -- to SRAM Controller
 init : out std_logic; -- to Shift Registers
 Add_Data : out std_logic
@@ -24,7 +24,8 @@ signal state : state_type;
 signal clk_en : std_logic;
 signal direction_s : std_logic := '0';
 signal halt_s : std_logic := '0';
-signal PR_pulse_s : std_logic := '0';
+signal PR_mode_s : std_logic := '0';
+signal RW_pulse_s : std_logic := '0';
 signal OP_mode_s : std_logic := '0';
 signal init_s : std_logic := '0';
 signal Add_Data_s : std_logic := '0';
@@ -32,6 +33,8 @@ signal data_valid_reg : std_logic := '0';
 signal count : std_logic_vector(27 downto 0) := X"000000F";
 
 begin
+RW_pulse <= RW_pulse_s;
+
 clk_enabler:
 process(clk, ireset)
 begin
@@ -73,19 +76,23 @@ begin
 	state <= Initialize;
 	--direction <= '0'; -- Don't care
 	--halt <= '1'; -- Don't care
-	PR_pulse <= '0';
+	PR_mode <= '0';
 	OP_mode <= '0';
 	init <= '1';
 	--Add_Data <= '1'; -- Don't care
 
 	elsif(rising_edge(clk)) then
+		if RW_pulse_s = '1' then
+			RW_pulse_s <= '0';
+		end if;
+		
 		case state is
 		-- if data_valid '1' being here makes OP_F_HALT only occur when DV = '1'
 		when Initialize =>
 		state <= OP_F_Halt;   -- RW = 0
 		direction <= '0';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -96,7 +103,7 @@ begin
 		state <= OP_F;
 		direction <= '0';
 		halt <= '0';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -105,7 +112,7 @@ begin
 		state <= OP_R_Halt;
 		direction <= '1';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		-- Add_Data <= '1';
@@ -114,7 +121,7 @@ begin
 		state <= PR_F_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -128,7 +135,7 @@ begin
 		state <= OP_F_Halt;
 		direction <= '0';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -137,7 +144,7 @@ begin
 		state <= OP_R;
 		direction <= '1';
 		halt <= '0';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -146,7 +153,7 @@ begin
 		state <= PR_F_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -161,7 +168,7 @@ begin
 		state <= OP_R;
 		direction <= '1';
 		halt <= '0';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -170,7 +177,7 @@ begin
 		state <= OP_F_Halt;
 		direction <= '0';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1';-- Don't care
@@ -179,7 +186,7 @@ begin
 		state <= PR_R_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -193,7 +200,7 @@ begin
 		state <= OP_R_Halt;
 		direction <= '1';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -202,7 +209,7 @@ begin
 		state <= OP_F;
 		direction <= '0';
 		halt <= '0';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1';-- Don't care
@@ -211,7 +218,7 @@ begin
 		state <= PR_R_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -226,7 +233,7 @@ begin
 		state <= PR_F_Add;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '0';
@@ -235,7 +242,8 @@ begin
 		state <= PR_F_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
+		RW_pulse_s <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -244,7 +252,7 @@ begin
 		state <= OP_F_Halt;
 		direction <= '0';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -258,7 +266,7 @@ begin
 		state <= PR_F_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -267,7 +275,8 @@ begin
 		state <= PR_F_Add;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
+		RW_pulse_s <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '0';
@@ -276,7 +285,7 @@ begin
 		state <= OP_F_Halt;
 		direction <= '0';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -290,7 +299,8 @@ begin
 		state <= PR_R_Add;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
+		RW_pulse_s <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '0';
@@ -299,7 +309,8 @@ begin
 		state <= PR_R_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
+		RW_pulse_s <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -308,7 +319,7 @@ begin
 		state <= OP_R_Halt;
 		direction <= '1';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care
@@ -321,7 +332,7 @@ begin
 		state <= PR_R_Data;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '1';
@@ -330,7 +341,8 @@ begin
 		state <= PR_R_Add;
 		-- direction <= '0'; -- Don't care
 		halt <= '1';
-		PR_pulse <= '1';
+		PR_mode <= '1';
+		RW_pulse_s <= '1';
 		OP_mode <= '0';
 		init <= '0';
 		Add_Data <= '0';
@@ -339,7 +351,7 @@ begin
 		state <= OP_R_Halt;
 		direction <= '1';
 		halt <= '1';
-		PR_pulse <= '0';
+		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
 		--Add_Data <= '1'; -- Don't care

@@ -13,7 +13,8 @@ signal KEY_PRESS : std_logic_vector(4 downto 0);
 
 signal DIRECTION :  std_logic;  -- to counter
 signal HALT :  std_logic;  -- to counter
-signal PR_PULSE :  std_logic; -- to SRAM Controller
+signal PR_MODE :  std_logic; -- to SRAM Controller
+signal RW_PULSE : std_logic;
 signal OP_MODE :  std_logic; -- to SRAM Controller
 signal INIT :  std_logic; -- to Shift Registers
 signal ADD_DATA :  std_logic;
@@ -27,7 +28,8 @@ key_press : in std_logic_vector(4 downto 0);
 
 direction : out std_logic;  -- to counter
 halt : out std_logic;  -- to counter
-PR_pulse : out std_logic; -- to SRAM Controller
+PR_MODE : out std_logic; -- to SRAM Controller
+RW_PULSE : out std_logic;
 OP_mode : out std_logic; -- to SRAM Controller
 init : out std_logic; -- to Shift Registers
 Add_Data : out std_logic
@@ -46,7 +48,8 @@ key_press => KEY_PRESS,
 
 direction => DIRECTION,
 halt => HALT,
-PR_pulse => PR_PULSE,
+PR_MODE => PR_MODE,
+RW_PULSE => RW_PULSE,
 OP_mode => OP_MODE,
 init => INIT,
 Add_Data => ADD_DATA
@@ -66,15 +69,22 @@ begin
 DATA_VALID <= '0';
 wait for 4*PER; -- wait for reset
 DATA_VALID <= '1';
-KEY_PRESS <= "10001";
-wait for 5 ns;
+KEY_PRESS <= "10010";
+wait for 2*PER;
 DATA_VALID <= '0';
 
 wait for 4*PER; -- wait for reset
 
 DATA_VALID <= '1';
 KEY_PRESS <= "10000";
-wait for 5 ns;
+wait for 2*PER;
+DATA_VALID <= '0';
+
+wait for 4*PER; -- wait for reset
+
+DATA_VALID <= '1';
+KEY_PRESS <= "10000";
+wait for 2*PER;
 DATA_VALID <= '0';
 
 end process;
