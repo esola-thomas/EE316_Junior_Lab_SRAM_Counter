@@ -55,8 +55,12 @@ end component;
 
     process begin
     
+        clk_en      <= '0';
+        R_W         <= '1';
     wait for 10 ns;
+    
     end process
 begin
-    iMemAdress <= (others => '0');
+    iMemAdress  <= (others => '0');
+
 end tb;

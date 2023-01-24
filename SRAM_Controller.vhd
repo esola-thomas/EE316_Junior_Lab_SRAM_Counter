@@ -5,20 +5,21 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity SRAM_Controller is 
 generic(
-    write_speed_delay : std_logic_vector(27 downto 0) := X"17D7840" -- Set to 25,000,000 clock cycles (10 ns) 
+    write_speed_delay : std_logic_vector(27 downto 0) := X"17D7840"; -- Set to 25,000,000 clock cycles (10 ns) 
+    read_speed_delay : std_logic_vector(23 downto 0) := X"BEBC20" -- Set to 12,500,000 clock cycles (5 ns) 
 );
 port(
-    birData     : inout std_logic_vector(15 downto 0); -- Input data (write)
-    iMemAdress  : in std_logic_vector(19 downto 0);
+    iData       : in std_logic_vector(15 downto 0); -- Input port for data to be written to SRAM
+    oData_SRAM  : out std_logic_vector(15 downto 0); -- Output port of data to be read from SRAM
+    iMemAdress  : in std_logic_vector(19 downto 0); -- Memory adress to read/write
     R_W         : in std_logic; -- Read when HIGH, Write when LOW
     clk         : in std_logic;
     clk_en      : in std_logic; -- clk enable from counter this triggers change form idle
 
     -- Memory outputs
+    SRAM_data   : inout std_logic_vector(15 downto 0); -- Bus to SRAM IC
     oMemAdress  : out std_logic_Vector(19 downto 0);
-    oCE, oUB, oLB, oWE, oOE : out std_logic;
-
-    Data_r_conf : out std_logic := '1' -- When HIGH the data buffer in the bus will be set to HIGH impedance
+    oCE, oUB, oLB, oWE, oOE : out std_logic
     );
 end SRAM_Controller;
 
@@ -40,13 +41,12 @@ begin
 
     mem_state_machine : process (clk, clk_en, R_W) begin
         if (mem_state = idle) then -- Wating for new isntruction
-            birData_in <= '0'; -- Output the current Data_reg value
+            birData_in <= '1'; -- Output the current Data_reg value
             -- Outputs to memory
             oWE <= '1';
             oOE <= '1';
             Data_reg <= Data_reg;    -- Set Data register to all 1's on idle
             counter_delay <= (others => '0'); 
-            Data_r_conf <= '0';
 
             -- Change current state
             if (rising_edge(clk_en)) then   -- The counter clk enable went HIGH
@@ -62,10 +62,9 @@ begin
             birData_in <= '1'; -- Reading from SRAM so data acts as input
             oWE <= '1';
             oOE <= '0';
-            Data_r_conf <= '1'; -- Set Data buf to HIGH Impedance to allow SRAM to read birData output
-            Data_reg <= birData;
             counter_delay <= counter_delay + '1';
-            if (counter_delay = write_speed_delay) then -- Values have been hold for enough time (10 ns)
+            if (counter_delay = read_speed_delay) then -- Values have been hold for enough time (5 ns)
+                Data_reg <= SRAM_data;
                 mem_state <= idle;
             end if;
 
@@ -73,16 +72,18 @@ begin
             birData_in <= '0'; -- Writing to SRAM so data acts as output
             oWE <= '0';
             oOE <= '1';
-            Data_r_conf <= '0'; -- Allow this module to read form Data buf
-            Data_reg <= birData; -- Read data from SRAM, will be displayed during IDLE
+            Data_reg <= iData; -- Write data to SRAM
+            if(counter_delay = write_speed_delay) then
+                mem_state <= idle;
+            end if;
         end if;
 
     end process mem_state_machine;
 
     oMemAdress <= iMemAdress;
     -- Tristate buffer configuration, when birData_in = 1 the port acts as input
-    birData <= Data_reg when (birData_in = '1') else (others => 'Z');
-    
+    SRAM_data <= (others => 'Z') when (birData_in = '1') else Data_reg;
+    oData_SRAM <= Data_reg;
     -- For Current requirements this outputs can be set low
     oCE <= '0';
     oUB <= '0';
