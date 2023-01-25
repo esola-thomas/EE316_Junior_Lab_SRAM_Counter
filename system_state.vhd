@@ -3,15 +3,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity system_state is
-port ( clk : in std_logic;
+port ( 
+clk : in std_logic;
 ireset : in std_logic;
 data_valid : in std_logic;
 key_press : in std_logic_vector(4 downto 0);
+mem_adress : in std_logic_vector(7 downto 0);
 
 direction : out std_logic;  -- to counter
 halt : out std_logic;  -- to counter
 PR_mode : out std_logic; -- to SRAM Controller
-RW_pulse : out std_logic;
+RW_pulse : out std_logic; -- Read when HIGH, Write when LOW
 OP_mode : out std_logic; -- to SRAM Controller
 init : out std_logic; -- to Shift Registers
 Add_Data : out std_logic
@@ -20,11 +22,11 @@ end entity;
 
 architecture behavioral of system_state is
 type state_type is (Initialize, OP_F_Halt, OP_R_Halt, OP_F, OP_R, PR_F_Data, PR_F_Add, PR_R_Data, PR_R_Add);
-signal state : state_type;
+signal state : state_type := Initialize;
 signal clk_en : std_logic;
 signal direction_s : std_logic := '0';
 signal halt_s : std_logic := '0';
-signal PR_mode_s : std_logic := '0';
+signal PR_mode_s : std_logic := '0'; -- Not Used ####
 signal RW_pulse_s : std_logic := '0';
 signal OP_mode_s : std_logic := '0';
 signal init_s : std_logic := '0';
@@ -32,8 +34,9 @@ signal Add_Data_s : std_logic := '0';
 signal data_valid_reg : std_logic := '0';
 signal count : std_logic_vector(27 downto 0) := X"000000F";
 
+signal init_count : std_logic_vector(11 downto 0) := (others => '0');
 begin
-RW_pulse <= RW_pulse_s;
+-- RW_pulse <= RW_pulse_s;
 
 clk_enabler:
 process(clk, ireset)
@@ -79,22 +82,32 @@ begin
 	PR_mode <= '0';
 	OP_mode <= '0';
 	init <= '1';
+	
 	--Add_Data <= '1'; -- Don't care
 
 	elsif(rising_edge(clk)) then
-		if RW_pulse_s = '1' then
-			RW_pulse_s <= '0';
-		end if;
+		-- if RW_pulse_s = '1' then
+		-- 	RW_pulse_s <= '0';
+		-- end if;
 		
 		case state is
 		-- if data_valid '1' being here makes OP_F_HALT only occur when DV = '1'
 		when Initialize =>
-		state <= OP_F_Halt;   -- RW = 0
+		-- state <= OP_F_Halt;   -- RW = 0
 		direction <= '0';
-		halt <= '1';
-		PR_mode <= '0';
+		halt <= '0';
+		PR_mode <= '1';
 		OP_mode <= '1';
-		init <= '0';
+		init <= '1';
+		RW_pulse <= '0'; -- Set SRAM Controller to write 
+
+
+		if (mem_adress = "00001111") then 
+			state <= OP_F_Halt;
+		else
+			state <= Initialize;
+		end if;
+
 		--Add_Data <= '1'; -- Don't care
 
 		when OP_F_Halt =>
@@ -106,6 +119,7 @@ begin
 		PR_mode <= '0';
 		OP_mode <= '1';
 		init <= '0';
+		RW_pulse <= '1';
 		--Add_Data <= '1'; -- Don't care
 
 		elsif (key_press = "10000") then -- L pressed RW = 1
