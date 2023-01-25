@@ -10,13 +10,13 @@ data_valid : in std_logic;
 key_press : in std_logic_vector(4 downto 0);
 mem_adress : in std_logic_vector(7 downto 0);
 
-direction : out std_logic;  -- to counter
-halt : out std_logic;  -- to counter
-PR_mode : out std_logic; -- to SRAM Controller
-RW_pulse : out std_logic; -- Read when HIGH, Write when LOW
-OP_mode : out std_logic; -- to SRAM Controller
-init : out std_logic; -- to Shift Registers
-Add_Data : out std_logic
+direction : out std_logic := '1';  -- to counter
+halt : out std_logic := '0';  -- to counter
+PR_mode : out std_logic := '0'; -- to SRAM Controller
+RW_pulse : out std_logic := '0'; -- Read when HIGH, Write when LOW
+OP_mode : out std_logic := '0'; -- to SRAM Controller
+init : out std_logic := '1'; -- to Shift Registers
+Add_Data : out std_logic := '0'
 );
 end entity;
 
@@ -24,13 +24,7 @@ architecture behavioral of system_state is
 type state_type is (Initialize, OP_F_Halt, OP_R_Halt, OP_F, OP_R, PR_F_Data, PR_F_Add, PR_R_Data, PR_R_Add);
 signal state : state_type := Initialize;
 signal clk_en : std_logic;
-signal direction_s : std_logic := '0';
-signal halt_s : std_logic := '0';
-signal PR_mode_s : std_logic := '0'; -- Not Used ####
 signal RW_pulse_s : std_logic := '0';
-signal OP_mode_s : std_logic := '0';
-signal init_s : std_logic := '0';
-signal Add_Data_s : std_logic := '0';
 signal data_valid_reg : std_logic := '0';
 signal count : std_logic_vector(27 downto 0) := X"000000F";
 
@@ -77,11 +71,12 @@ process(clk)
 begin
 	if ireset = '1' then
 	state <= Initialize;
-	--direction <= '0'; -- Don't care
-	--halt <= '1'; -- Don't care
-	PR_mode <= '0';
-	OP_mode <= '0';
+	direction <= '0';
+	halt <= '0';
+	PR_mode <= '1';
+	OP_mode <= '1';
 	init <= '1';
+	RW_pulse <= '0'; -- Set SRAM Controller to write 
 	
 	--Add_Data <= '1'; -- Don't care
 
@@ -94,12 +89,6 @@ begin
 		-- if data_valid '1' being here makes OP_F_HALT only occur when DV = '1'
 		when Initialize =>
 		-- state <= OP_F_Halt;   -- RW = 0
-		direction <= '0';
-		halt <= '0';
-		PR_mode <= '1';
-		OP_mode <= '1';
-		init <= '1';
-		RW_pulse <= '0'; -- Set SRAM Controller to write 
 
 
 		if (mem_adress = "00001111") then 

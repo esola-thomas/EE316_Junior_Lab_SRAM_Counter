@@ -10,7 +10,6 @@ generic(
 );
 port(
     iData       : in std_logic_vector(15 downto 0); -- Input port for data to be written to SRAM
-    oData_SRAM  : out std_logic_vector(15 downto 0); -- Output port of data to be read from SRAM
     iMemAdress  : in std_logic_vector(19 downto 0); -- Memory adress to read/write
     R_W         : in std_logic; -- Read when HIGH, Write when LOW
     clk         : in std_logic;
@@ -93,7 +92,6 @@ begin
     oMemAdress <= iMemAdress;
     -- Tristate buffer configuration, when birData_in = 1 the port acts as input
     SRAM_data <= (others => 'Z') when (birData_in = '1') else Data_reg;
-    oData_SRAM <= Data_reg;
     -- For Current requirements this outputs can be set low
     oCE <= '0';
     oUB <= '0';
