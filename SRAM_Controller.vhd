@@ -29,13 +29,13 @@ architecture arch of SRAM_Controller is
     signal read_delay : std_logic := '0';
 
     type mem_operation is (
-        idle, 
+        mem_idle, 
         mem_read,
         mem_write,
         mem_write_end
     );
 
-    signal mem_state : mem_operation := idle;
+    signal mem_state : mem_operation := mem_idle;
 
 begin
 
@@ -50,63 +50,52 @@ begin
     end process read_write_counter;
     
     mem_state_machine : process (clk, clk_en, R_W) begin
-
-        if (mem_state = idle) then -- Wating for new isntruction
-            birData_in <= '0'; -- Output the current Data_reg value
-            -- Outputs to memory
+    if (rising_edge(clk)) then
+        if(mem_state <= mem_write_end) then
+            Data_reg <= iData; -- Write data to SRAM
             oWE <= '1';
             oOE <= '1';
-            Data_reg <= Data_reg;    -- Set Data register to all 1's on idle
-            count <= '0';
-            read_delay <= '0';
+            birData_in <= '0';
+            mem_state <= mem_idle;
+        end if;
 
-            -- Change current state
-            if (rising_edge(clk_en)) then   -- The counter clk enable went HIGH
-                if (R_W = '1') then         -- READ STATE
-                mem_state <= mem_read;
-                birData_in <= '1';
-                elsif (R_W = '0') then      -- WRITE STATE
-                mem_state <= mem_write;
-                Data_reg <= iData;
-                else                        -- Stay in idle state
-                mem_state <= idle;
-                end if;
-            end if;
-
-        elsif (mem_state = mem_read) then
-            birData_in <= '1'; -- Reading from SRAM so data acts as input
-            oWE <= '1';
-            oOE <= '0';
-            if (read_delay = '1') then
-                mem_state <= idle;
+        if(read_delay = '1') then 
+            if(mem_state = mem_read) then
                 Data_reg <= SRAM_data;
-            else     
-                read_delay <= '1';
-            end if;
-
-        elsif (mem_state = mem_write)  then
-            birData_in <= '0'; -- Writing to SRAM so data acts as output
-            Data_reg <= iData; -- Write data to SRAM
-            if (read_delay = '1') then
+                read_delay <= '0';
+                -- Idle state
+                mem_state <= mem_idle;
+                birData_in <= '0'; -- Output the current Data_reg value
+                oWE <= '1';
+                oOE <= '1';
+            elsif(mem_state = mem_write) then
                 oWE <= '0';
                 oOE <= '1';
                 read_delay <= '0';
                 mem_state <= mem_write_end;
-            else     
-                read_delay <= '1';
-            end if;
-
-        elsif (mem_state = mem_write_end) then 
-            birData_in <= '0'; -- Writing to SRAM so data acts as output
-            Data_reg <= iData; -- Write data to SRAM
-            if (read_delay = '1') then
-                oWE <= '1';
-                mem_state <= idle;
-            else 
-                read_delay <= '1';
             end if;
         end if;
 
+        if(clk_en = '1') then
+                if (R_W = '1') then         -- READ STATE
+                    mem_state <= mem_read;
+                    birData_in <= '1'; -- Reading from SRAM so data acts as input
+                    oWE <= '1';
+                    oOE <= '0';
+                    read_delay <= '1';
+                elsif (R_W = '0') then      -- WRITE STATE
+                    mem_state <= mem_write;
+                    read_delay <= '1';
+                    birData_in <= '0'; -- Writing to SRAM so data acts as output
+                    Data_reg <= iData; -- Write data to SRAM
+                else                        -- Stay in idle state
+                    mem_state <= mem_idle;
+                    birData_in <= '0'; -- Output the current Data_reg value
+                    oWE <= '1';
+                    oOE <= '1';
+                end if;
+            end if;
+        end if;
     end process mem_state_machine;
 
     oMemAdress <= iMemAdress;
