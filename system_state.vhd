@@ -12,10 +12,10 @@ port (
 	key_press 	: in std_logic_vector(4 downto 0);
 
 	direction 	: out std_logic := '0';   	-- to counter (0 count up 1 count down)
-	halt 		: out std_logic := '0';		-- to counter (0 run 1)
+	halt 		: out std_logic := '1';		-- to counter (0 run 1)
 	PR_mode 	: out std_logic := '0'; 	-- to SRAM Controller
 	OP_mode 	: out std_logic := '0'; 	-- to SRAM Controller
-	SRAM_RW 	: out std_logic := '1';		-- Outout to set read/write mode in SRAM controller
+	SRAM_RW 	: out std_logic := '0';		-- Outout to set read/write mode in SRAM controller
 	init 		: out std_logic := '1'; 	-- System init output state
 	Add_Data 	: out std_logic := '0'
 );
@@ -55,7 +55,9 @@ architecture behavioral of system_state is
 			-- if data_valid '1' being here makes OP_F_HALT only occur when DV = '1'
 			when Initialize =>
 			-- state <= OP_F_Halt;   -- RW = 0
-			if (init_count = 15) then 
+			
+			halt <= '0';
+			if (init_count = 17) then 
 				direction <= '0';
 				halt <= '1';
 				PR_mode <= '0';

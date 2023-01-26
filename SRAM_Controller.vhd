@@ -14,7 +14,8 @@ port(
     -- Memory outputs
     SRAM_data   : inout std_logic_vector(15 downto 0); -- Bus to SRAM IC
     oMemAdress  : out std_logic_Vector(19 downto 0);
-    oCE, oUB, oLB, oWE, oOE : out std_logic
+    oCE, oUB, oLB, oWE, oOE : out std_logic;
+    display_mem : out std_logic_vector(7 downto 0)
     );
 end SRAM_Controller;
 
@@ -23,6 +24,7 @@ architecture arch of SRAM_Controller is
     signal birData_in   : std_logic := '1'; -- Tristate buff is input when 1
     signal count        : std_logic := '0'; -- Count when '1'
     signal counter_delay: std_logic_vector(27 downto 0) := (others => '0'); -- Counter for delay hold delay of data to SRAM
+    signal iMemAdress_reg : std_logic_vector(19 downto 0);
     -- Memory State Machine
 
     -- Read SRAM reg
@@ -98,7 +100,14 @@ begin
         end if;
     end process mem_state_machine;
 
-    oMemAdress <= iMemAdress;
+    process (clk_en) begin 
+        if (rising_edge(clk_en)) then
+            iMemAdress_reg <= iMemAdress;
+        end if;
+    end process;
+
+    oMemAdress <= iMemAdress_reg;
+    display_mem <= iMemAdress_reg (7 downto 0);
     -- Tristate buffer configuration, when birData_in = 1 the port acts as input
     SRAM_data <= (others => 'Z') when (birData_in = '1') else Data_reg;
     -- For Current requirements this outputs can be set low

@@ -101,24 +101,20 @@ applicable agreement for further details.
 		(line (pt 256 128)(pt 240 128)(line_width 1))
 	)
 	(port
+		(pt 256 144)
+		(output)
+		(text "display_mem[7..0]" (rect 0 0 74 12)(font "Arial" ))
+		(text "display_mem[7..0]" (rect 161 139 235 151)(font "Arial" ))
+		(line (pt 256 144)(pt 240 144)(line_width 3))
+	)
+	(port
 		(pt 256 32)
 		(bidir)
 		(text "SRAM_data[15..0]" (rect 0 0 76 12)(font "Arial" ))
 		(text "SRAM_data[15..0]" (rect 159 27 235 39)(font "Arial" ))
 		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
-	(parameter
-		"write_speed_delay"
-		"0001011111010111100001000000"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"read_speed_delay"
-		"101111101011110000100000"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 240 160)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 272 -64 372 16))
 )
