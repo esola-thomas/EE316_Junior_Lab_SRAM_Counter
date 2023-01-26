@@ -823,42 +823,42 @@ applicable agreement for further details.
 		(pt 256 48)
 		(output)
 		(text "oMemAdress[19..0]" (rect 0 0 95 12)(font "Arial" ))
-		(text "oMemAdress[19..0]" (rect 155 43 235 55)(font "Arial" ))
+		(text "oMemAdress[19..0]" (rect 155 43 250 55)(font "Arial" ))
 		(line (pt 256 48)(pt 240 48)(line_width 3))
 	)
 	(port
 		(pt 256 64)
 		(output)
 		(text "oCE" (rect 0 0 21 12)(font "Arial" ))
-		(text "oCE" (rect 218 59 235 71)(font "Arial" ))
+		(text "oCE" (rect 218 59 239 71)(font "Arial" ))
 		(line (pt 256 64)(pt 240 64))
 	)
 	(port
 		(pt 256 80)
 		(output)
 		(text "oUB" (rect 0 0 21 12)(font "Arial" ))
-		(text "oUB" (rect 218 75 235 87)(font "Arial" ))
+		(text "oUB" (rect 218 75 239 87)(font "Arial" ))
 		(line (pt 256 80)(pt 240 80))
 	)
 	(port
 		(pt 256 96)
 		(output)
 		(text "oLB" (rect 0 0 18 12)(font "Arial" ))
-		(text "oLB" (rect 220 91 235 103)(font "Arial" ))
+		(text "oLB" (rect 220 91 238 103)(font "Arial" ))
 		(line (pt 256 96)(pt 240 96))
 	)
 	(port
 		(pt 256 112)
 		(output)
 		(text "oWE" (rect 0 0 23 12)(font "Arial" ))
-		(text "oWE" (rect 216 107 235 119)(font "Arial" ))
+		(text "oWE" (rect 216 107 239 119)(font "Arial" ))
 		(line (pt 256 112)(pt 240 112))
 	)
 	(port
 		(pt 256 128)
 		(output)
 		(text "oOE" (rect 0 0 21 12)(font "Arial" ))
-		(text "oOE" (rect 218 123 235 135)(font "Arial" ))
+		(text "oOE" (rect 218 123 239 135)(font "Arial" ))
 		(line (pt 256 128)(pt 240 128))
 	)
 	(port
@@ -884,7 +884,7 @@ applicable agreement for further details.
 	(annotation_block (parameter)(rect 1768 168 2144 216))
 )
 (symbol
-	(rect 376 80 584 256)
+	(rect 376 80 600 256)
 	(text "system_state" (rect 5 0 73 12)(font "Arial" ))
 	(text "inst9" (rect 8 160 31 172)(font "Arial" ))
 	(port
@@ -904,75 +904,75 @@ applicable agreement for further details.
 	(port
 		(pt 0 64)
 		(input)
-		(text "data_valid" (rect 0 0 50 12)(font "Arial" ))
-		(text "data_valid" (rect 21 59 71 71)(font "Arial" ))
+		(text "clk_en" (rect 0 0 31 12)(font "Arial" ))
+		(text "clk_en" (rect 21 59 52 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "key_press[4..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "key_press[4..0]" (rect 21 75 98 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
+		(text "data_valid" (rect 0 0 50 12)(font "Arial" ))
+		(text "data_valid" (rect 21 75 71 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
 	)
 	(port
 		(pt 0 96)
 		(input)
-		(text "clk_en" (rect 0 0 31 12)(font "Arial" ))
-		(text "clk_en" (rect 21 91 52 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
+		(text "key_press[4..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "key_press[4..0]" (rect 21 91 98 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
-		(pt 208 32)
+		(pt 224 32)
 		(output)
 		(text "direction" (rect 0 0 41 12)(font "Arial" ))
-		(text "direction" (rect 153 27 187 39)(font "Arial" ))
-		(line (pt 208 32)(pt 192 32))
+		(text "direction" (rect 169 27 203 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32))
 	)
 	(port
-		(pt 208 48)
+		(pt 224 48)
 		(output)
 		(text "halt" (rect 0 0 17 12)(font "Arial" ))
-		(text "halt" (rect 173 43 187 55)(font "Arial" ))
-		(line (pt 208 48)(pt 192 48))
+		(text "halt" (rect 189 43 203 55)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48))
 	)
 	(port
-		(pt 208 64)
+		(pt 224 64)
 		(output)
 		(text "PR_mode" (rect 0 0 48 12)(font "Arial" ))
-		(text "PR_mode" (rect 147 59 187 71)(font "Arial" ))
-		(line (pt 208 64)(pt 192 64))
+		(text "PR_mode" (rect 163 59 203 71)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64))
 	)
 	(port
-		(pt 208 80)
-		(output)
-		(text "RW_pulse" (rect 0 0 50 12)(font "Arial" ))
-		(text "RW_pulse" (rect 145 75 187 87)(font "Arial" ))
-		(line (pt 208 80)(pt 192 80))
-	)
-	(port
-		(pt 208 96)
+		(pt 224 80)
 		(output)
 		(text "OP_mode" (rect 0 0 48 12)(font "Arial" ))
-		(text "OP_mode" (rect 147 91 187 103)(font "Arial" ))
-		(line (pt 208 96)(pt 192 96))
+		(text "OP_mode" (rect 163 75 203 87)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80))
 	)
 	(port
-		(pt 208 112)
+		(pt 224 96)
+		(output)
+		(text "SRAM_RW" (rect 0 0 55 12)(font "Arial" ))
+		(text "SRAM_RW" (rect 157 91 203 103)(font "Arial" ))
+		(line (pt 224 96)(pt 208 96))
+	)
+	(port
+		(pt 224 112)
 		(output)
 		(text "init" (rect 0 0 14 12)(font "Arial" ))
-		(text "init" (rect 176 107 187 119)(font "Arial" ))
-		(line (pt 208 112)(pt 192 112))
+		(text "init" (rect 192 107 203 119)(font "Arial" ))
+		(line (pt 224 112)(pt 208 112))
 	)
 	(port
-		(pt 208 128)
+		(pt 224 128)
 		(output)
 		(text "Add_Data" (rect 0 0 48 12)(font "Arial" ))
-		(text "Add_Data" (rect 147 123 187 135)(font "Arial" ))
-		(line (pt 208 128)(pt 192 128))
+		(text "Add_Data" (rect 163 123 203 135)(font "Arial" ))
+		(line (pt 224 128)(pt 208 128))
 	)
 	(drawing
-		(rectangle (rect 16 16 192 160))
+		(rectangle (rect 16 16 208 160))
 	)
 )
 (connector
@@ -996,15 +996,6 @@ applicable agreement for further details.
 (connector
 	(pt 0 224)
 	(pt 88 224)
-	(bus)
-)
-(connector
-	(pt 336 144)
-	(pt 376 144)
-)
-(connector
-	(pt 360 160)
-	(pt 376 160)
 	(bus)
 )
 (connector
@@ -1056,29 +1047,6 @@ applicable agreement for further details.
 (connector
 	(pt 352 56)
 	(pt 352 112)
-)
-(connector
-	(pt 336 -16)
-	(pt 336 144)
-)
-(connector
-	(pt 336 144)
-	(pt 336 240)
-)
-(connector
-	(pt 360 -32)
-	(pt 360 160)
-	(bus)
-)
-(connector
-	(pt 360 160)
-	(pt 360 224)
-	(bus)
-)
-(connector
-	(pt 312 -80)
-	(pt 312 208)
-	(bus)
 )
 (connector
 	(pt 48 56)
@@ -1185,10 +1153,6 @@ applicable agreement for further details.
 )
 (connector
 	(pt 712 128)
-	(pt 2000 128)
-)
-(connector
-	(pt 712 128)
 	(pt 712 176)
 )
 (connector
@@ -1267,10 +1231,6 @@ applicable agreement for further details.
 	(pt 680 64)
 )
 (connector
-	(pt 648 192)
-	(pt 720 192)
-)
-(connector
 	(pt 944 496)
 	(pt 2240 496)
 	(bus)
@@ -1279,22 +1239,6 @@ applicable agreement for further details.
 	(pt 1176 344)
 	(pt 1232 344)
 	(bus)
-)
-(connector
-	(pt 1280 328)
-	(pt 1688 328)
-)
-(connector
-	(pt 1280 328)
-	(pt 1280 112)
-)
-(connector
-	(pt 704 112)
-	(pt 1280 112)
-)
-(connector
-	(pt 1280 112)
-	(pt 2000 112)
 )
 (connector
 	(pt 1624 224)
@@ -1401,11 +1345,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "Direction" (rect 602 96 645 108)(font "Arial" )(invisible))
-	(pt 584 112)
-	(pt 680 112)
-)
-(connector
 	(pt 680 64)
 	(pt 680 112)
 )
@@ -1414,40 +1353,77 @@ applicable agreement for further details.
 	(pt 680 264)
 )
 (connector
-	(text "Halt" (rect 602 112 622 124)(font "Arial" )(invisible))
-	(pt 584 128)
-	(pt 664 128)
-)
-(connector
-	(text "PR_Mode" (rect 602 128 649 140)(font "Arial" )(invisible))
-	(pt 584 144)
-	(pt 696 144)
-)
-(connector
-	(pt 584 160)
-	(pt 704 160)
-)
-(connector
-	(text "OP_Mode" (rect 602 160 649 172)(font "Arial" )(invisible))
-	(pt 584 176)
-	(pt 712 176)
-)
-(connector
-	(text "init" (rect 610 176 624 188)(font "Arial" )(invisible))
-	(pt 584 192)
-	(pt 648 192)
-)
-(connector
 	(pt 944 344)
 	(pt 944 496)
 	(bus)
 )
 (connector
-	(pt 344 440)
-	(pt 344 176)
+	(text "Direction" (rect 602 96 645 108)(font "Arial" )(invisible))
+	(pt 600 112)
+	(pt 680 112)
 )
 (connector
-	(pt 344 440)
+	(text "Halt" (rect 602 112 622 124)(font "Arial" )(invisible))
+	(pt 600 128)
+	(pt 664 128)
+)
+(connector
+	(text "PR_Mode" (rect 602 128 649 140)(font "Arial" )(invisible))
+	(pt 600 144)
+	(pt 696 144)
+)
+(connector
+	(pt 600 160)
+	(pt 704 160)
+)
+(connector
+	(text "OP_Mode" (rect 602 160 649 172)(font "Arial" )(invisible))
+	(pt 600 176)
+	(pt 712 176)
+)
+(connector
+	(text "init" (rect 610 176 624 188)(font "Arial" )(invisible))
+	(pt 600 192)
+	(pt 648 192)
+)
+(connector
+	(pt 648 192)
+	(pt 720 192)
+)
+(connector
+	(pt 704 112)
+	(pt 2000 112)
+)
+(connector
+	(pt 1272 328)
+	(pt 1688 328)
+)
+(connector
+	(pt 1272 328)
+	(pt 1272 128)
+)
+(connector
+	(pt 712 128)
+	(pt 1272 128)
+)
+(connector
+	(pt 1272 128)
+	(pt 2000 128)
+)
+(connector
+	(pt 376 160)
+	(pt 336 160)
+)
+(connector
+	(pt 336 -16)
+	(pt 336 160)
+)
+(connector
+	(pt 336 160)
+	(pt 336 240)
+)
+(connector
+	(pt 352 440)
 	(pt 920 440)
 )
 (connector
@@ -1455,12 +1431,34 @@ applicable agreement for further details.
 	(pt 960 440)
 )
 (connector
+	(pt 352 144)
+	(pt 352 440)
+)
+(connector
+	(pt 352 144)
+	(pt 376 144)
+)
+(connector
+	(pt 312 -80)
+	(pt 312 208)
+	(bus)
+)
+(connector
 	(pt 376 176)
-	(pt 344 176)
+	(pt 360 176)
+	(bus)
+)
+(connector
+	(pt 360 -32)
+	(pt 360 176)
+	(bus)
+)
+(connector
+	(pt 360 176)
+	(pt 360 224)
+	(bus)
 )
 (junction (pt 48 208))
-(junction (pt 336 144))
-(junction (pt 360 160))
 (junction (pt 648 192))
 (junction (pt 352 56))
 (junction (pt 712 328))
@@ -1471,5 +1469,7 @@ applicable agreement for further details.
 (junction (pt 944 344))
 (junction (pt 664 128))
 (junction (pt 680 112))
-(junction (pt 1280 112))
 (junction (pt 1944 296))
+(junction (pt 1272 128))
+(junction (pt 336 160))
+(junction (pt 360 176))

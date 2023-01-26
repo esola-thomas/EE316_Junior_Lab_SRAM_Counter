@@ -4,10 +4,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity SRAM_Controller is 
-generic(
-    write_speed_delay : std_logic_vector(27 downto 0) := X"17D7840"; -- Set to 25,000,000 clock cycles (10 ns) 
-    read_speed_delay : std_logic_vector(23 downto 0) := X"BEBC20" -- Set to 12,500,000 clock cycles (5 ns) 
-);
 port(
     iData       : in std_logic_vector(15 downto 0); -- Input port for data to be written to SRAM
     iMemAdress  : in std_logic_vector(19 downto 0); -- Memory adress to read/write
@@ -28,10 +24,15 @@ architecture arch of SRAM_Controller is
     signal count        : std_logic := '0'; -- Count when '1'
     signal counter_delay: std_logic_vector(27 downto 0) := (others => '0'); -- Counter for delay hold delay of data to SRAM
     -- Memory State Machine
+
+    -- Read SRAM reg
+    signal read_delay : std_logic := '0';
+
     type mem_operation is (
         idle, 
         mem_read,
-        mem_write
+        mem_write,
+        mem_write_end
     );
 
     signal mem_state : mem_operation := idle;
@@ -51,39 +52,58 @@ begin
     mem_state_machine : process (clk, clk_en, R_W) begin
 
         if (mem_state = idle) then -- Wating for new isntruction
-            birData_in <= '1'; -- Output the current Data_reg value
+            birData_in <= '0'; -- Output the current Data_reg value
             -- Outputs to memory
             oWE <= '1';
             oOE <= '1';
             Data_reg <= Data_reg;    -- Set Data register to all 1's on idle
             count <= '0';
+            read_delay <= '0';
 
             -- Change current state
             if (rising_edge(clk_en)) then   -- The counter clk enable went HIGH
                 if (R_W = '1') then         -- READ STATE
                 mem_state <= mem_read;
+                birData_in <= '1';
                 elsif (R_W = '0') then      -- WRITE STATE
                 mem_state <= mem_write;
+                Data_reg <= iData;
                 else                        -- Stay in idle state
                 mem_state <= idle;
                 end if;
             end if;
+
         elsif (mem_state = mem_read) then
             birData_in <= '1'; -- Reading from SRAM so data acts as input
             oWE <= '1';
             oOE <= '0';
-            -- if (counter_delay = read_speed_delay) then -- Values have been hold for enough time (5 ns)
-            --     Data_reg <= SRAM_data;
-            --     mem_state <= idle;
-            -- end if;
+            if (read_delay = '1') then
+                mem_state <= idle;
+                Data_reg <= SRAM_data;
+            else     
+                read_delay <= '1';
+            end if;
+
         elsif (mem_state = mem_write)  then
             birData_in <= '0'; -- Writing to SRAM so data acts as output
-            oWE <= '0';
-            oOE <= '1';
             Data_reg <= iData; -- Write data to SRAM
-            count <= '1';
-            if(counter_delay = "0001011111010111100001000000") then  -- Values have been hold for enough time (10 ns)
+            if (read_delay = '1') then
+                oWE <= '0';
+                oOE <= '1';
+                read_delay <= '0';
+                mem_state <= mem_write_end;
+            else     
+                read_delay <= '1';
+            end if;
+
+        elsif (mem_state = mem_write_end) then 
+            birData_in <= '0'; -- Writing to SRAM so data acts as output
+            Data_reg <= iData; -- Write data to SRAM
+            if (read_delay = '1') then
+                oWE <= '1';
                 mem_state <= idle;
+            else 
+                read_delay <= '1';
             end if;
         end if;
 

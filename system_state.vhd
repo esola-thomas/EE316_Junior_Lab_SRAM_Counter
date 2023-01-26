@@ -30,10 +30,10 @@ architecture behavioral of system_state is
 	
 	begin
 
-	init_state_counter : process(clk) begin
-		if (rising_edge(clk)) then
+	init_state_counter : process(clk, clk_en) begin
+		if (rising_edge(clk_en)) then
 			if (init_count < 256) then 
-				init_count = init_count + 1;
+				init_count <= init_count + 1;
 			end if;
 		end if;
 	end process init_state_counter;
@@ -55,8 +55,13 @@ architecture behavioral of system_state is
 			-- if data_valid '1' being here makes OP_F_HALT only occur when DV = '1'
 			when Initialize =>
 			-- state <= OP_F_Halt;   -- RW = 0
-
-			if (init_count = 255) then 
+			if (init_count = 15) then 
+				direction <= '0';
+				halt <= '1';
+				PR_mode <= '0';
+				OP_mode <= '1';
+				init <= '0';
+				SRAM_RW <= '1';
 				state <= OP_F_Halt;
 			else
 				state <= Initialize;
@@ -69,7 +74,7 @@ architecture behavioral of system_state is
 				if (key_press = "10001") then -- H pressed -- TEST
 				state <= OP_F;
 				direction <= '0';
-				halt <= '1';
+				halt <= '0';
 				PR_mode <= '0';
 				OP_mode <= '1';
 				init <= '0';
