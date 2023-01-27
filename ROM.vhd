@@ -88,7 +88,7 @@ BEGIN
 	GENERIC MAP (
 		address_aclr_a => "NONE",
 		clock_enable_input_a => "NORMAL",
-		clock_enable_output_a => "NORMAL",
+		clock_enable_output_a => "BYPASS",
 		init_file => "sine.mif",
 		intended_device_family => "Cyclone IV E",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
@@ -96,7 +96,7 @@ BEGIN
 		numwords_a => 256,
 		operation_mode => "ROM",
 		outdata_aclr_a => "NONE",
-		outdata_reg_a => "CLOCK0",
+		outdata_reg_a => "UNREGISTERED",
 		widthad_a => 8,
 		width_a => 16,
 		width_byteena_a => 1
@@ -136,7 +136,7 @@ END SYN;
 -- Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "256"
 -- Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 -- Retrieval info: PRIVATE: RegAddr NUMERIC "1"
--- Retrieval info: PRIVATE: RegOutput NUMERIC "1"
+-- Retrieval info: PRIVATE: RegOutput NUMERIC "0"
 -- Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 -- Retrieval info: PRIVATE: SingleClock NUMERIC "1"
 -- Retrieval info: PRIVATE: UseDQRAM NUMERIC "0"
@@ -146,7 +146,7 @@ END SYN;
 -- Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 -- Retrieval info: CONSTANT: ADDRESS_ACLR_A STRING "NONE"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "NORMAL"
--- Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_A STRING "NORMAL"
+-- Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_A STRING "BYPASS"
 -- Retrieval info: CONSTANT: INIT_FILE STRING "sine.mif"
 -- Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone IV E"
 -- Retrieval info: CONSTANT: LPM_HINT STRING "ENABLE_RUNTIME_MOD=NO"
@@ -154,7 +154,7 @@ END SYN;
 -- Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "256"
 -- Retrieval info: CONSTANT: OPERATION_MODE STRING "ROM"
 -- Retrieval info: CONSTANT: OUTDATA_ACLR_A STRING "NONE"
--- Retrieval info: CONSTANT: OUTDATA_REG_A STRING "CLOCK0"
+-- Retrieval info: CONSTANT: OUTDATA_REG_A STRING "UNREGISTERED"
 -- Retrieval info: CONSTANT: WIDTHAD_A NUMERIC "8"
 -- Retrieval info: CONSTANT: WIDTH_A NUMERIC "16"
 -- Retrieval info: CONSTANT: WIDTH_BYTEENA_A NUMERIC "1"
