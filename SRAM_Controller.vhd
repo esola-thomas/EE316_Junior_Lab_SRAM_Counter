@@ -24,7 +24,8 @@ architecture arch of SRAM_Controller is
     signal birData_in   : std_logic := '1'; -- Tristate buff is input when 1
     signal count        : std_logic := '0'; -- Count when '1'
     signal counter_delay: std_logic_vector(27 downto 0) := (others => '0'); -- Counter for delay hold delay of data to SRAM
-    signal iMemAdress_reg : std_logic_vector(19 downto 0);
+    signal iMemAdress_reg : std_logic_vector(19 downto 0) := (others => '0');
+    signal iMemAdress_reg2 : std_logic_vector(19 downto 0) := (others => '0');
     -- Memory State Machine
 
     -- Read SRAM reg
@@ -51,63 +52,65 @@ begin
         end if;
     end process read_write_counter;
     
-    mem_state_machine : process (clk, clk_en, R_W) begin
-    if (rising_edge(clk)) then
-        if(mem_state <= mem_write_end) then
-            Data_reg <= iData; -- Write data to SRAM
-            oWE <= '1';
-            oOE <= '1';
-            birData_in <= '0';
-            mem_state <= mem_idle;
-        end if;
+    mem_state_machine : process (clk) begin
+        if (rising_edge(clk)) then
+            case mem_state is
+                when mem_read => 
+                    if(read_delay = '1') then
+                        Data_reg <= SRAM_data;
+                        read_delay <= '0';
+                        -- Idle state
+                        mem_state <= mem_idle;
+                        birData_in <= '0'; -- Output the current Data_reg value
+                        oWE <= '1';
+                        oOE <= '1';
+                    end if;
 
-        if(read_delay = '1') then 
-            if(mem_state = mem_read) then
-                Data_reg <= SRAM_data;
-                read_delay <= '0';
-                -- Idle state
-                mem_state <= mem_idle;
-                birData_in <= '0'; -- Output the current Data_reg value
-                oWE <= '1';
-                oOE <= '1';
-            elsif(mem_state = mem_write) then
-                oWE <= '0';
-                oOE <= '1';
-                read_delay <= '0';
-                mem_state <= mem_write_end;
-            end if;
-        end if;
-
-        if(clk_en = '1') then
-                if (R_W = '1') then         -- READ STATE
-                    mem_state <= mem_read;
-                    birData_in <= '1'; -- Reading from SRAM so data acts as input
-                    oWE <= '1';
-                    oOE <= '0';
-                    read_delay <= '1';
-                elsif (R_W = '0') then      -- WRITE STATE
-                    mem_state <= mem_write;
-                    read_delay <= '1';
-                    birData_in <= '0'; -- Writing to SRAM so data acts as output
+                when mem_write =>
+                    oWE <= '0';
+                    oOE <= '1';
+                    read_delay <= '0';
+                    mem_state <= mem_write_end;
+                    
+                when mem_write_end =>
                     Data_reg <= iData; -- Write data to SRAM
-                else                        -- Stay in idle state
-                    mem_state <= mem_idle;
-                    birData_in <= '0'; -- Output the current Data_reg value
                     oWE <= '1';
                     oOE <= '1';
-                end if;
-            end if;
+                    birData_in <= '0';
+                    mem_state <= mem_idle;
+
+                when mem_idle =>
+                    if (clk_en = '1' and R_W = '1') then
+                        mem_state <= mem_read;
+                        birData_in <= '1'; -- Reading from SRAM so data acts as input
+                        oWE <= '1';
+                        oOE <= '0';
+                        read_delay <= '1';
+                    elsif (clk_en = '1' and R_W = '0') then      -- WRITE STATE
+                        mem_state <= mem_write;
+                        read_delay <= '1';
+                        birData_in <= '0'; -- Writing to SRAM so data acts as output
+                        Data_reg <= iData; -- Write data to SRAM
+                    else                        -- Stay in idle state
+                        mem_state <= mem_idle;
+                        Data_reg <= Data_reg;
+                        birData_in <= '0'; -- Output the current Data_reg value
+                        oWE <= '1';
+                        oOE <= '1';   
+                    end if;
+            end case;
         end if;
     end process mem_state_machine;
 
     process (clk_en) begin 
         if (rising_edge(clk_en)) then
             iMemAdress_reg <= iMemAdress;
+            iMemAdress_reg2 <= iMemAdress_reg;
         end if;
     end process;
 
-    oMemAdress <= iMemAdress_reg;
-    display_mem <= iMemAdress_reg (7 downto 0);
+    oMemAdress <= iMemAdress_reg2;
+    display_mem <= iMemAdress_reg2 (7 downto 0);
     -- Tristate buffer configuration, when birData_in = 1 the port acts as input
     SRAM_data <= (others => 'Z') when (birData_in = '1') else Data_reg;
     -- For Current requirements this outputs can be set low
