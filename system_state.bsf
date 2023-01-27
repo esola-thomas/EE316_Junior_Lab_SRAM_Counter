@@ -96,16 +96,23 @@ applicable agreement for further details.
 	(port
 		(pt 224 112)
 		(output)
-		(text "init" (rect 0 0 9 12)(font "Arial" ))
-		(text "init" (rect 194 107 203 119)(font "Arial" ))
+		(text "W_pulse" (rect 0 0 36 12)(font "Arial" ))
+		(text "W_pulse" (rect 167 107 203 119)(font "Arial" ))
 		(line (pt 224 112)(pt 208 112)(line_width 1))
 	)
 	(port
 		(pt 224 128)
 		(output)
-		(text "Add_Data" (rect 0 0 42 12)(font "Arial" ))
-		(text "Add_Data" (rect 161 123 203 135)(font "Arial" ))
+		(text "init" (rect 0 0 9 12)(font "Arial" ))
+		(text "init" (rect 194 123 203 135)(font "Arial" ))
 		(line (pt 224 128)(pt 208 128)(line_width 1))
+	)
+	(port
+		(pt 224 144)
+		(output)
+		(text "Add_Data" (rect 0 0 42 12)(font "Arial" ))
+		(text "Add_Data" (rect 161 139 203 151)(font "Arial" ))
+		(line (pt 224 144)(pt 208 144)(line_width 1))
 	)
 	(drawing
 		(rectangle (rect 16 16 208 160)(line_width 1))

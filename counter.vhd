@@ -56,7 +56,7 @@ architecture behavioral of counter is
 					if (cnt = 0) then
 					cnt <= CNT_MAX;				-- When reached 0 and counting down set conter to MAX value
 					else
-					cnt <= cnt - 1;				-- Each clock cycle count down		
+					cnt <= cnt - 1;				-- Each clock cycle count down		 
 					end if;
 				else
 					if (cnt = CNT_MAX) then		-- When counting up if MAX is reach reset to 0

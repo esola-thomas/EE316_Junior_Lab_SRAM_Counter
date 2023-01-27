@@ -59,6 +59,13 @@ applicable agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 1))
 	)
 	(port
+		(pt 0 112)
+		(input)
+		(text "init" (rect 0 0 9 12)(font "Arial" ))
+		(text "init" (rect 21 107 30 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
 		(pt 256 48)
 		(output)
 		(text "oMemAdress[19..0]" (rect 0 0 80 12)(font "Arial" ))
