@@ -10,6 +10,7 @@ rtl_work
 *.ini
 _*
 @_*
+*.sdo
 
 # Ignore multiple files
 *_ignore
@@ -24,3 +25,4 @@ _*
 *.jar
 
 
+simulation/modelsim/SRAM_Counter_7_1200mv_0c_vhd_slow.sdo
