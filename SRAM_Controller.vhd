@@ -11,6 +11,7 @@ port(
     clk         : in std_logic;
     clk_en      : in std_logic; -- clk enable from counter this triggers change form idle
 	 init 		 : in std_logic;
+	 PR_Mode		 : in std_logic;
     -- Memory outputs
     SRAM_data   : inout std_logic_vector(15 downto 0); -- Bus to SRAM IC
     oMemAdress  : out std_logic_Vector(19 downto 0);
@@ -26,6 +27,8 @@ architecture arch of SRAM_Controller is
     signal counter_delay: std_logic_vector(27 downto 0) := (others => '0'); -- Counter for delay hold delay of data to SRAM
     signal iMemAdress_reg : std_logic_vector(19 downto 0) := (others => '0');
     signal iMemAdress_reg2 : std_logic_vector(19 downto 0) := (others => '0');
+	 signal init_reg : std_logic := '1';
+	 signal PR_Mode_reg : std_logic := '0';
     -- Memory State Machine
 
     -- Read SRAM reg
@@ -54,6 +57,7 @@ begin
     
     mem_state_machine : process (clk) begin
         if (rising_edge(clk)) then
+				
             case mem_state is
                 when mem_read => 
                     if(read_delay = '1') then
@@ -70,6 +74,7 @@ begin
                     oWE <= '0';
                     oOE <= '1';
                     read_delay <= '0';
+						  Data_reg <= iData;
                     mem_state <= mem_write_end;
                     
                 when mem_write_end =>
@@ -77,10 +82,10 @@ begin
                     oWE <= '1';
                     oOE <= '1';
                     birData_in <= '0';
-                    mem_state <= mem_idle;
-
+						  mem_state <= mem_idle;
+						  
                 when mem_idle =>
-                    if (clk_en = '1' and R_W = '1') then
+                    if ((clk_en = '1' and R_W = '1') or (init_reg = '1' and init = '0') or (PR_Mode_reg = '1' and PR_Mode = '0')) then
                         mem_state <= mem_read;
                         birData_in <= '1'; -- Reading from SRAM so data acts as input
                         oWE <= '1';
@@ -92,13 +97,16 @@ begin
                         birData_in <= '0'; -- Writing to SRAM so data acts as output
                         Data_reg <= iData; -- Write data to SRAM
                     else                        -- Stay in idle state
-                        mem_state <= mem_idle;
+								mem_state <= mem_idle;
                         Data_reg <= Data_reg;
                         birData_in <= '0'; -- Output the current Data_reg value
                         oWE <= '1';
-                        oOE <= '1';   
+                        oOE <= '1'; 
+								-- ########Register Memory input or output. If it changes read SRAM to update Data_reg########## Or Read memory after counter is restarted
                     end if;
             end case;
+				PR_Mode_reg <= PR_Mode;
+				init_reg <= init;
         end if;
     end process mem_state_machine;
 
@@ -109,10 +117,10 @@ begin
         end if;
     end process;
 
-    oMemAdress <= iMemAdress_reg2 when init = '1' else
+    oMemAdress <= iMemAdress_reg when init = '1' else
 						iMemAdress;
 						
-    display_mem <= iMemAdress_reg2 (7 downto 0)when init = '1' else
+    display_mem <= iMemAdress_reg (7 downto 0)when init = '1' else
 						 iMemAdress (7 downto 0);
     -- Tristate buffer configuration, when birData_in = 1 the port acts as input
     SRAM_data <= (others => 'Z') when (birData_in = '1') else Data_reg;

@@ -26,15 +26,17 @@ architecture behavioral of system_state is
 	type state_type is (Initialize, OP_F_Halt, OP_R_Halt, OP_F, OP_R, PR_F_Data, PR_F_Add, PR_R_Data, PR_R_Add);
 	signal state : state_type := Initialize; -- Set default state to Initialize
 	signal data_valid_reg : std_logic := '0';
-	signal count : std_logic_vector(27 downto 0) := X"000000F";
+	signal count : std_logic_vector(27 downto 0) := X"0000000";
 	signal init_count : integer := 0;
 	signal W_pulse_reg : std_logic := '0';
+	signal done_count : std_logic := '0';
+	signal done_wait_count : integer := 0;
 	
 	begin
 	W_pulse <= W_pulse_reg;
 	init_state_counter : process(clk, clk_en) begin
 		if (rising_edge(clk_en)) then
-			if (init_count < 256) then 
+			if (init_count < 260) then 
 				init_count <= init_count + 1;
 			end if;
 		end if;
@@ -53,6 +55,7 @@ architecture behavioral of system_state is
 			--Add_Data <= '1'; -- Don't care
 
 		elsif(rising_edge(clk)) then
+			
 			if(W_pulse_reg = '1') then
 				W_pulse_reg <= '0';
 			end if;
@@ -60,9 +63,11 @@ architecture behavioral of system_state is
 			-- if data_valid '1' being here makes OP_F_HALT only occur when DV = '1'
 			when Initialize =>
 			-- state <= OP_F_Halt;   -- RW = 0
-			
 			halt <= '0';
-			if (init_count = 17) then 
+			if(done_count = '1') then
+				done_wait_count <= done_wait_count + 1;
+			end if;
+			if(done_wait_count = 1) then
 				direction <= '0';
 				halt <= '1';
 				PR_mode <= '0';
@@ -70,6 +75,11 @@ architecture behavioral of system_state is
 				init <= '0';
 				SRAM_RW <= '1';
 				state <= OP_F_Halt;
+				done_count <= '0';
+			end if;
+			
+			if (init_count = 256) then 
+				done_count <= '1';
 			else
 				state <= Initialize;
 			end if;
@@ -94,6 +104,7 @@ architecture behavioral of system_state is
 				halt <= '1';
 				PR_mode <= '0';
 				OP_mode <= '1';
+				SRAM_RW <= '1';
 				init <= '0';
 				-- Add_Data <= '1';
 
@@ -105,6 +116,7 @@ architecture behavioral of system_state is
 				OP_mode <= '0';
 				init <= '0';
 				Add_Data <= '1';
+				SRAM_RW <= '1';
 
 				end if;
 			end if;
@@ -117,6 +129,7 @@ architecture behavioral of system_state is
 				halt <= '1';
 				PR_mode <= '0';
 				OP_mode <= '1';
+				SRAM_RW <= '1';
 				init <= '0';
 				--Add_Data <= '1'; -- Don't care
 
@@ -126,6 +139,7 @@ architecture behavioral of system_state is
 				halt <= '0';
 				PR_mode <= '0';
 				OP_mode <= '1';
+				SRAM_RW <= '1';
 				init <= '0';
 				--Add_Data <= '1'; -- Don't care
 
@@ -137,6 +151,7 @@ architecture behavioral of system_state is
 				OP_mode <= '0';
 				init <= '0';
 				Add_Data <= '1';
+				SRAM_RW <= '1';
 
 				end if;
 			end if;
@@ -151,6 +166,7 @@ architecture behavioral of system_state is
 					PR_mode <= '0';
 					OP_mode <= '1';
 					init <= '0';
+					SRAM_RW <= '1';
 					--Add_Data <= '1'; -- Don't care
 
 				elsif (key_press = "10000") then -- L pressed   RW = 1
@@ -160,6 +176,7 @@ architecture behavioral of system_state is
 					PR_mode <= '0';
 					OP_mode <= '1';
 					init <= '0';
+					SRAM_RW <= '1';
 					--Add_Data <= '1';-- Don't care
 
 				elsif (key_press = "10010") then -- SH pressed
@@ -170,7 +187,7 @@ architecture behavioral of system_state is
 					OP_mode <= '0';
 					init <= '0';
 					Add_Data <= '1';
-
+					SRAM_RW <= '1';
 				end if;
 			end if;
 
@@ -183,6 +200,7 @@ architecture behavioral of system_state is
 					PR_mode <= '0';
 					OP_mode <= '1';
 					init <= '0';
+					SRAM_RW <= '1';
 					--Add_Data <= '1'; -- Don't care
 				elsif (key_press = "10000") then -- L pressed   RW = 1
 					state <= OP_F;
@@ -191,6 +209,7 @@ architecture behavioral of system_state is
 					PR_mode <= '0';
 					OP_mode <= '1';
 					init <= '0';
+					SRAM_RW <= '1';
 					--Add_Data <= '1';-- Don't care
 				elsif (key_press = "10010") then -- SH pressed
 					state <= PR_R_Data;
@@ -200,6 +219,7 @@ architecture behavioral of system_state is
 					OP_mode <= '0';
 					init <= '0';
 					Add_Data <= '1';
+					SRAM_RW <= '1';
 				end if;
 			end if;
 			when PR_F_Data =>
@@ -212,12 +232,13 @@ architecture behavioral of system_state is
 					OP_mode <= '0';
 					init <= '0';
 					Add_Data <= '0';
+					SRAM_RW <= '1';
 				elsif (key_press = "10000") then -- L pressed   RW = 0
 					state <= PR_F_Data;
 					-- direction <= '0'; -- Don't care
 					halt <= '1';
 					PR_mode <= '1';
-					SRAM_RW <= '1';
+					SRAM_RW <= '0';
 					OP_mode <= '0';
 					init <= '0';
 					W_pulse_reg <= '1';
@@ -228,6 +249,7 @@ architecture behavioral of system_state is
 					halt <= '1';
 					PR_mode <= '0';
 					OP_mode <= '1';
+					SRAM_RW <= '1';
 					init <= '0';
 					--Add_Data <= '1'; -- Don't care
 				end if;
@@ -240,6 +262,7 @@ architecture behavioral of system_state is
 					halt <= '1';
 					PR_mode <= '1';
 					OP_mode <= '0';
+					SRAM_RW <= '1';
 					init <= '0';
 					Add_Data <= '1';
 				elsif (key_press = "10000") then -- L pressed   RW = 0
@@ -247,7 +270,7 @@ architecture behavioral of system_state is
 					-- direction <= '0'; -- Don't care
 					halt <= '1';
 					PR_mode <= '1';
-					SRAM_RW <= '1';
+					SRAM_RW <= '0';
 					OP_mode <= '0';
 					W_pulse_reg <= '1';
 					init <= '0';
@@ -258,6 +281,7 @@ architecture behavioral of system_state is
 					halt <= '1';
 					PR_mode <= '0';
 					OP_mode <= '1';
+					SRAM_RW <= '1';
 					init <= '0';
 					--Add_Data <= '1'; -- Don't care
 				end if;
@@ -279,7 +303,7 @@ architecture behavioral of system_state is
 						-- direction <= '0'; -- Don't care
 						halt <= '1';
 						PR_mode <= '1';
-						SRAM_RW <= '1';
+						SRAM_RW <= '0';
 						OP_mode <= '0';
 						W_pulse_reg <= '1';
 						init <= '0';
@@ -290,6 +314,7 @@ architecture behavioral of system_state is
 						direction <= '1';
 						halt <= '1';
 						PR_mode <= '0';
+						SRAM_RW <= '1';
 						OP_mode <= '1';
 						init <= '0';
 						--Add_Data <= '1'; -- Don't care
@@ -303,6 +328,7 @@ architecture behavioral of system_state is
 						halt <= '1';
 						PR_mode <= '1';
 						OP_mode <= '0';
+						SRAM_RW <= '1';
 						init <= '0';
 						Add_Data <= '1';
 					elsif (key_press = "10000") then -- L pressed   RW = 0
@@ -310,7 +336,7 @@ architecture behavioral of system_state is
 						-- direction <= '0'; -- Don't care
 						halt <= '1';
 						PR_mode <= '1';
-						SRAM_RW <= '1';
+						SRAM_RW <= '0';
 						OP_mode <= '0';
 						W_pulse_reg <= '1';
 						init <= '0';
@@ -321,6 +347,7 @@ architecture behavioral of system_state is
 						halt <= '1';
 						PR_mode <= '0';
 						OP_mode <= '1';
+						SRAM_RW <= '1';
 						init <= '0';
 						--Add_Data <= '1'; -- Don't care
 					end if;

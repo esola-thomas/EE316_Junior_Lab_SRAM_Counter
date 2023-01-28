@@ -30,7 +30,7 @@ architecture behavioral of counter is
 	begin
 	
 	clk_delay_reg <= 	clk_delay when init = '0' else
-						"0000000000000000000000000011" when init = '1';
+						 "0000000000000000000000001010" when init = '1';
 	-- clk en process
 	process (clk, ireset) begin
 		if (rising_edge(clk) and halt = '0') then 
@@ -49,20 +49,24 @@ architecture behavioral of counter is
 	
 	-- Counter process
 	process(clk, ireset) begin
-			if (rising_edge(clk) and oClk_en = '1') then
+			if (rising_edge(clk)) then
 				if (ireset = '1') then 			-- When reset is high counter goes to 0
 					cnt <= (others => '0');
-				elsif(direction = '1') then 	-- If not reset and direction is set to 1 then count down
-					if (cnt = 0) then
-					cnt <= CNT_MAX;				-- When reached 0 and counting down set conter to MAX value
-					else
-					cnt <= cnt - 1;				-- Each clock cycle count down		 
-					end if;
 				else
-					if (cnt = CNT_MAX) then		-- When counting up if MAX is reach reset to 0
-						cnt <= (others => '0');
-					else
-						cnt <= cnt + 1;			-- At clock cycle rising edge count up if direction is 0
+					if(oClk_en = '1') then
+						if(direction = '1') then
+							if (cnt = 0) then
+								cnt <= CNT_MAX;				-- When reached 0 and counting down set conter to MAX value
+								else
+								cnt <= cnt - 1;				-- Each clock cycle count down		 
+							end if;
+						else
+							if (cnt = CNT_MAX) then		-- When counting up if MAX is reach reset to 0
+								cnt <= (others => '0');
+							else
+								cnt <= cnt + 1;			-- At clock cycle rising edge count up if direction is 0
+							end if;
+						end if;
 					end if;
 				end if;
 			end if;

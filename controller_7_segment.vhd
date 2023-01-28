@@ -22,7 +22,7 @@ architecture arch of controller_7_segment is
             "1111000" when iData = "0111" else -- 7
             "0000000" when iData = "1000" else -- 8
             "0010000" when iData = "1001" else -- 9
-            "0100000" when iData = "1010" else -- A
+            "0001000" when iData = "1010" else -- A
             "0000011" when iData = "1011" else -- B
             "1000110" when iData = "1100" else -- C
             "0100001" when iData = "1101" else -- D
